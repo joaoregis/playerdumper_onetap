@@ -1,3 +1,7 @@
+//
+// MADE BY: Polaco#0001
+// Onetap Script
+//
 var ScreenSize = null;
 var watermark_font_title = null;
 var watermark_font_content = null;
