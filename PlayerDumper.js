@@ -127,10 +127,10 @@ function drawTable(x, y) {
         }
 
         const c = rainbowColors();
-        Render.FilledRect(x - 180, y - 5, 360, 2, [c.r, c.g, c.b, alpha]);
-        Render.FilledRect(x - 180, y - 3, 360, 20, [0, 0, 0, 160]);
-        Render.FilledRect(x - 180, y + 17, 360, 20 * playerListTR.concat(playerListCT).length, [1, 1, 1, 160]);
-        Render.FilledRect(x - 180, y + 17 + (20 * playerListTR.concat(playerListCT).length), 360, 10, [1, 1, 1, 160]);
+        Render.FilledRect(x - 200, y - 5, 400, 2, [c.r, c.g, c.b, alpha]);
+        Render.FilledRect(x - 200, y - 3, 400, 20, [0, 0, 0, 160]);
+        Render.FilledRect(x - 200, y + 17, 400, 20 * playerListTR.concat(playerListCT).length, [1, 1, 1, 160]);
+        Render.FilledRect(x - 200, y + 17 + (20 * playerListTR.concat(playerListCT).length), 400, 10, [1, 1, 1, 160]);
     }
 }
 
@@ -175,6 +175,16 @@ function onDraw() {
 
 }
 
+function resolvePlayerNick(nick) {
+
+    if (nick.length > 10) {
+        return nick.slice(0, 10) + "...";
+    }
+
+    return nick;
+
+}
+
 function mount_player_list() {
 
     playerListTR = [];
@@ -211,7 +221,7 @@ function mount_player_list() {
                         if (dumperOptions === 2 || dumperOptions === 3)
                             playerListTR.push({
                                 player_obj: players[i],
-                                player_name: player_name.trim(),
+                                player_name: resolvePlayerNick((player_name && player_name.trim ? player_name.trim() : player_name).toString()),
                                 player_win_amt: player_win_amt.toString(),
                                 "player_team": team,
                                 player_rank,
@@ -225,7 +235,7 @@ function mount_player_list() {
                         if (dumperOptions === 1 || dumperOptions === 3)
                             playerListCT.push({
                                 player_obj: players[i],
-                                player_name: player_name.trim(),
+                                player_name: resolvePlayerNick((player_name && player_name.trim ? player_name.trim() : player_name).toString()),
                                 player_win_amt: player_win_amt.toString(),
                                 "player_team": team,
                                 player_rank,
@@ -256,3 +266,4 @@ function mount_player_list() {
 })()
 
 Cheat.RegisterCallback("Draw", "onDraw");
+
