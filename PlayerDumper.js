@@ -180,6 +180,10 @@ function mount_player_list() {
     playerListTR = [];
     playerListCT = [];
 
+    // 3 = both
+    // 1 = CT
+    // 2 = TR
+    const dumperOptions = UI.GetValue(DUMPER_OPTIONS);
     var players = Entity.GetPlayers();
     if (players.length > 0) {
 
@@ -199,13 +203,6 @@ function mount_player_list() {
                 if (is_bot) {
                     player_name = "BOT " + player_name;
                 }
-
-                // 3 = both
-                // 1 = CT
-                // 2 = TR
-                const dumperOptions = UI.GetValue(DUMPER_OPTIONS);
-                if (dumperOptions === 0) shouldRenderMenu = false;
-                else shouldRenderMenu = true;
 
                 switch (player_team_raw) {
                     case 2: // tr
@@ -240,11 +237,16 @@ function mount_player_list() {
                         break;
                 }
 
+
+
             }
 
         }
 
     }
+
+    if (dumperOptions === 0 || playerListCT.concat(playerListTR).length === 0) shouldRenderMenu = false;
+    else shouldRenderMenu = true;
 
 }
 
